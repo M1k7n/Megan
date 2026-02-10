@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>calc</title>
+    <style>
+      @font-face {
+        font-family: digital-7;
+        src: url(digital-7.ttf);
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+      }
+      .cinna {
+        position: absolute;
+        top: -80px;
+        right: -70px;
+      }
+      .kitty {
+        position: absolute;
+        top: -70px;
+        left: -63px;
+      }
+      .calc {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border: solid 5px pink;
+        padding: 35px;
+        background-color: rgb(253, 245, 255);
+        border-radius: 3%;
+        max-width: 501px;
+      }
+      #display {
+        overflow: auto;
+        padding-left: 20px;
+        font-family: digital-7;
+        border: solid pink 2px;
+        background-color: #009933;
+        opacity: 0.6;
+        border-radius: 5%;
+        margin-bottom: 15px;
+        width: 265px;
+        height: 80px;
+        font-size: xx-large;
+      }
+      .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 70px);
+        gap: 5px;
+      }
+      .buttons :nth-child(17) {
+        grid-column-start: 3;
+        grid-column-end: 1;
+        grid-row-start: 5;
+        grid-row-end: 5;
+      }
+      .buttons button {
+        border: solid rgb(249, 151, 168);
+        background-color: pink;
+        font-size: large;
+        height: 60px;
+        border-radius: 15%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="calc">
+      <img
+        src="https://cdn.7tv.app/emote/01FWB97C100001G2Z4KNS5QMVM/4x.avif"
+        class="kitty"
+      />
+      <img
+        src="http://cdn.7tv.app/emote/01GS57WEP000056K1TAZPZQRK9/4x.avif"
+        class="cinna"
+      />
+      <input type="text" id="display" />
+      <div class="buttons">
+        <button onclick="clearDisplay()">AC</button>
+        <button onclick="deleteLast()">DEL</button>
+        <button onclick="appendToDisplay('**')">∛</button>
+        <button onclick="appendToDisplay('/')">/</button>
+        <button onclick="appendToDisplay('7')">7</button>
+        <button onclick="appendToDisplay('8')">8</button>
+        <button onclick="appendToDisplay('9')">9</button>
+        <button onclick="appendToDisplay('*')">×</button>
+        <button onclick="appendToDisplay('4')">4</button>
+        <button onclick="appendToDisplay('5')">5</button>
+        <button onclick="appendToDisplay('6')">6</button>
+        <button onclick="appendToDisplay('-')">-</button>
+        <button onclick="appendToDisplay('1')">1</button>
+        <button onclick="appendToDisplay('2')">2</button>
+        <button onclick="appendToDisplay('3')">3</button>
+        <button onclick="appendToDisplay('+')">+</button>
+        <button onclick="appendToDisplay('0')">0</button>
+        <button onclick="appendToDisplay('00')">00</button>
+        <button onclick="calculate()" id="equals">=</button>
+      </div>
+    </div>
+    <script>
+      const display = document.getElementById("display");
+
+      function appendToDisplay(value) {
+        display.value += value;
+      }
+
+      function clearDisplay() {
+        display.value = "";
+      }
+
+      function deleteLast() {
+        display.value = display.value.slice(0, -1);
+      }
+
+      function calculate() {
+        try {
+          display.value = eval(display.value); // Evaluates the string as math
+        } catch (error) {
+          display.value = "Error";
+        }
+      }
+      function scrollToRight() {
+        const element = document.getElementById("display");
+        element.scrollLeft = element.scrollWidth;
+      }
+    </script>
+  </body>
+</html>
